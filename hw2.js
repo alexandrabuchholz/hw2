@@ -34,28 +34,18 @@ let blockchain = [
 // Ben's KelloggCoin balance is 10350
 // Jeff's KelloggCoin balance is 2650
 
-let user = [
-  {name:"brian", balance: 0 },
-  {name: "ben", balance: 0 },
-  {name: "jeff", balance: 0 }
-]
-
 let getBalance = function(personName) {
-  for (let i=0; i<user.length; i++) {
-    if (user[i].name === personName)
-      return user[i].balance
-  }
-}
+  let balance = 0;
 
-for (let j=0; j<blockchain.length; j++){
-  for (let k=0; k<user.length; k++) {
-    if (blockchain[j].fromUser === user[k].name) {
-      user[k].balance = user[k].balance - blockchain[j].amount
+  for (let i=0; i<blockchain.length; i++) {
+    if (blockchain[i].fromUser === personName) {
+      balance = balance - blockchain[i].amount
     }
-    if (blockchain[j].toUser === user[k].name) {
-      user[k].balance = user[k].balance + blockchain[j].amount
+    if (blockchain[i].toUser === personName) {
+      balance = balance + blockchain[i].amount
     }
   }
+  return balance
 }
 
 console.log("Brian's KelloggCoin balance is " + getBalance("brian"));
